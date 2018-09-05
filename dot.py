@@ -5,6 +5,7 @@ def main(arr):
     row1 = trans[0]
     firstcol = row1.transpose()
     print(trans @ firstcol)
+    print('Done!')
 
 
 
