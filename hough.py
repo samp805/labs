@@ -1,4 +1,3 @@
-from picamera import PiCamera
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
@@ -22,9 +21,11 @@ print('Image after Canny')
 plt.imshow(edges)
 plt.show()
 
-lines = cv2.HoughLines(edges, 1, np.pi/180, 125)
+lines = cv2.HoughLines(edges, 1, np.pi/180, 150)
+thetas = list()
 for line in lines:
     for r, theta in line:
+        thetas.append(theta)
         a = np.cos(theta)
         b = np.sin(theta)
         x0 = a * r
@@ -34,6 +35,8 @@ for line in lines:
         x2 = int(x0 - 1000 * (-b))
         y2 = int(y0 - 1000 * a)
         cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+
+print('theta values:  \n{}'.format(thetas))
 
 #show image after canny
 print('Image after Hough')
